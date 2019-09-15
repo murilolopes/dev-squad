@@ -5,10 +5,35 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Product Details</div>
 
                 <div class="card-body">
-                    show product detials
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <strong>Name:</strong>
+                                {{ $product->name }}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <strong>Description:</strong>
+                                {{ $product->description }}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <strong>Price:</strong>
+                                {{ $product->price }}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <strong>Category:</strong>
+                                {{ $product->category->name }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
