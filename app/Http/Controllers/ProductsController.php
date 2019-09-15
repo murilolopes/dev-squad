@@ -25,7 +25,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = \App\Category::get()->all('name', 'id');
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -40,7 +41,7 @@ class ProductsController extends Controller
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'category_id' => 'required'
+            // 'category_id' => 'required'
         ]);
 
         \App\Product::create($request->all());
@@ -69,8 +70,10 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
+        $categories = \App\Category::get()->all('name', 'id');
         $product = \App\Product::findOrFail($id);
-        return view('products.edit',compact('product'));
+
+        return view('products.edit',compact('product', 'categories'));
     }
 
     /**
