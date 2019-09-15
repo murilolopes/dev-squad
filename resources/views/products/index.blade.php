@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">
                     <p style="margin-bottom: 0;">{{ $message }}</p>
@@ -18,18 +18,14 @@
                 <div class="card-body">
                     <table class="table table-bordered">
                         <tr>
-                            <th>ID</th>
                             <th>Name</th>
-                            <th>Description</th>
                             <th>Price</th>
                             <th>Category</th>
                             <th width="280px">Action</th>
                         </tr>
                         @foreach ($products as $product)
                             <tr>
-                                <td>{{ $product->id }}</td>
                                 <td>{{ $product->name }}</td>
-                                <td>{{ $product->description }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->category->name }}</td>
                                 <td>

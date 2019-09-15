@@ -33,6 +33,12 @@
                                 {{ $product->category->name }}
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <strong>Photo:</strong>
+                                <img src="{{ $product->media[0] ? $product->media[0]->getUrl() : '' }}">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

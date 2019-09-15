@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-header">Edit Product</div>
                 <div class="card-body">
-                    <form action="{{ route('products.update', $product->id) }}" method="POST">
+                    <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row">
@@ -40,6 +40,10 @@
                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="category_id">Photo:</label>
+                                <input type="file" id="photo" name="photo" accept="image/png, image/jpeg">
                             </div>
                             <div class="form-group col-12 text-center">
                                 <button type="cancel" class="btn btn-outline-primary">Cancel</button>
