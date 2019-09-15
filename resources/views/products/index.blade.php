@@ -10,7 +10,10 @@
                 </div>
             @endif
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">
+                    Products
+                    <a class="btn btn-success" style="float: right;" href="{{ route('products.create') }}">New Product</a>
+                </div>
 
                 <div class="card-body">
                     <table class="table table-bordered">
