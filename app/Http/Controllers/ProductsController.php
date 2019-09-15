@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
 
 class ProductsController extends Controller
 {
@@ -38,10 +40,10 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:products|max:64',
             'description' => 'required',
             'price' => 'required',
-            // 'category_id' => 'required'
+            'category_id' => 'required'
         ]);
 
         \App\Product::create($request->all());
@@ -85,14 +87,15 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $product = \App\Product::findOrFail($id);
+
         $request->validate([
-            'name' => 'required',
+            'name' => ['required', Rule::unique('products')->ignore($product->id), 'max:64'],
             'description' => 'required',
             'price' => 'required',
             'category_id' => 'required'
         ]);
         
-        $product = \App\Product::findOrFail($id);
         $product->update($request->all());
   
         return redirect()->route('products.index')
