@@ -42,7 +42,7 @@ class ProductsController extends Controller
         $request->validate([
             'name' => 'required|unique:products|max:64',
             'description' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'category_id' => 'required'
         ]);
 
@@ -92,7 +92,7 @@ class ProductsController extends Controller
         $request->validate([
             'name' => ['required', Rule::unique('products')->ignore($product->id), 'max:64'],
             'description' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'category_id' => 'required'
         ]);
         
