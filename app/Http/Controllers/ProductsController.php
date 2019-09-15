@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use DataTables;
 
 
 class ProductsController extends Controller
@@ -15,9 +16,12 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = \App\Product::latest()->paginate(10);
-  
-        return view('products.index',compact('products'));
+        return view('products.index');
+    }
+
+    public function datatable()
+    {
+        return Datatables::of(\App\Product::query()->with('category'))->make(true);
     }
 
     /**

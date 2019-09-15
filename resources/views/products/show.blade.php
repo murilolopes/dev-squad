@@ -36,7 +36,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <strong>Photo:</strong>
-                                <img src="{{ $product->media[0] ? $product->media[0]->getUrl() : '' }}">
+                                <img src="{{ count($product->media) ? $product->media[0]->getUrl() : '' }}">
                             </div>
                         </div>
                     </div>
