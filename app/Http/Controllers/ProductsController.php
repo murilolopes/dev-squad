@@ -104,6 +104,7 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
+        $product = \App\Product::findOrFail($id);
         $product->delete();
   
         return redirect()->route('products.index')
