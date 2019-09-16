@@ -84,7 +84,6 @@
             @yield('content')
         </main>
     </div>
-
     @stack('pageLevelScripts')
 </body>
 </html>

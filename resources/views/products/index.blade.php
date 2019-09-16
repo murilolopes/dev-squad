@@ -35,16 +35,17 @@
 
 @push('pageLevelScripts')
 <script>
-        $('#table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '{{ route('products.datatable') }}',
-            columns: [
-                { data: 'name', name: 'name' },
-                { data: 'price', name: 'price' },
-                { data: 'category.name', name: 'category' },
-                { data: 'actions', name: 'actions' },
-            ]
-        });
+    $('#table').DataTable({
+        order: [0, 'desc'],
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('products.datatable') }}',
+        columns: [
+            { data: 'name', name: 'name' },
+            { data: 'price', name: 'price' },
+            { data: 'category.name', name: 'category', searchable: false, orderable: false },
+            { data: 'actions', name: 'actions', searchable: false, orderable: false },
+        ]
+    });
 </script>
 @endpush
