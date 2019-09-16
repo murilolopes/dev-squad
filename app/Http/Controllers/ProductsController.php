@@ -21,7 +21,20 @@ class ProductsController extends Controller
 
     public function datatable()
     {
-        return Datatables::of(\App\Product::query()->with('category'))->make(true);
+        return Datatables::of(\App\Product::query()->with('category'))
+            ->addColumn('actions', function($row) {
+                $edit_path = route('products.edit', $row->id);
+                $show_path = route('products.show', $row->id);
+                $delete_path = route('products.destroy', $row->id);
+
+                $edit = "<a href=\"{$edit_path}\">edt<i class=\"fa fa-pencil\"></i></a>";
+                $show = "<a href=\"{$show_path}\">shw<i class=\"fa fa-pencil\"></i></a>";
+                $delete = "<a href=\"{$delete_path}\">dlt<i class=\"fa fa-pencil\"></i></a>";
+                
+                return "{$edit} {$show} {$delete}";
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
     }
 
     /**

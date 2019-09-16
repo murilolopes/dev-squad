@@ -22,6 +22,7 @@
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Category</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                     </table>
@@ -42,6 +43,7 @@
                 { data: 'name', name: 'name' },
                 { data: 'price', name: 'price' },
                 { data: 'category.name', name: 'category' },
+                { data: 'actions', name: 'actions' },
             ]
         });
 </script>
