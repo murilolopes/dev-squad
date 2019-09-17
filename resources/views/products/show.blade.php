@@ -23,14 +23,14 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <strong>Price:</strong>
-                                {{ $product->price }}
+                                <strong>Category:</strong>
+                                {{ $product->category->name }}
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <strong>Category:</strong>
-                                {{ $product->category->name }}
+                                <strong>Price:</strong>
+                                {{ $product->price }}
                             </div>
                         </div>
                         <div class="col-12">
