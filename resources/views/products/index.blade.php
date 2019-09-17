@@ -35,16 +35,36 @@
 
 @push('pageLevelScripts')
 <script>
-    $('#table').DataTable({
+    $('#ca').on('click', '.sa-remove', function () {
+        let id = $(this).data('id');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            showLoaderOnConfirm: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                axios.delete('/products/'+id).then(response => {
+                    Swal.fire('Deleted!', 'Product has been deleted.', 'success')
+                    table.draw();
+                }).catch(() => Swal.fire('Error!', 'An error occurred in server. Try again!', 'error'))
+            }
+        })
+    })
+    let table = $('#table').DataTable({
         order: [0, 'desc'],
         processing: true,
         serverSide: true,
         ajax: '{{ route('products.datatable') }}',
         columns: [
-            { data: 'name', name: 'name' },
-            { data: 'price', name: 'price' },
-            { data: 'category.name', name: 'category', searchable: false, orderable: false },
-            { data: 'actions', name: 'actions', searchable: false, orderable: false },
+        { data: 'name', name: 'name' },
+        { data: 'price', name: 'price' },
+        { data: 'category.name', name: 'category', searchable: false, orderable: false },
+        { data: 'actions', name: 'actions', searchable: false, orderable: false },
         ]
     });
 </script>

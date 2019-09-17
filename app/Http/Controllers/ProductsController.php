@@ -25,11 +25,10 @@ class ProductsController extends Controller
             ->addColumn('actions', function($row) {
                 $edit_path = route('products.edit', $row->id);
                 $show_path = route('products.show', $row->id);
-                $delete_path = route('products.destroy', $row->id);
 
-                $edit = "<a href=\"{$edit_path}\">edt<i class=\"fa fa-pencil\"></i></a>";
-                $show = "<a href=\"{$show_path}\">shw<i class=\"fa fa-pencil\"></i></a>";
-                $delete = "<a href=\"{$delete_path}\">dlt<i class=\"fa fa-pencil\"></i></a>";
+                $edit = "<a href=\"{$edit_path}\"><button class=\"btn btn-outline-info btn-sm\"><i class=\"fa fa-pencil\"></i></button></a>";
+                $show = "<a href=\"{$show_path}\"><button class=\"btn btn-outline-info btn-sm\"><i class=\"fa fa-eye\"></i></button></a>";
+                $delete = "<a href=\"#\" data-id=\"{$row->id}\" class=\"sa-remove\"><button class=\"btn btn-outline-danger btn-sm\"><i class=\"fa fa-times\"></i></button></a>";
                 
                 return "{$edit} {$show} {$delete}";
             })
@@ -136,7 +135,6 @@ class ProductsController extends Controller
         $product = \App\Product::findOrFail($id);
         $product->delete();
   
-        return redirect()->route('products.index')
-                        ->with('success','Product deleted successfully');
+        return 'true';
     }
 }
