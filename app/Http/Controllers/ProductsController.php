@@ -30,7 +30,7 @@ class ProductsController extends Controller
                 $show = "<a href=\"{$show_path}\"><button class=\"btn btn-outline-info btn-sm\"><i class=\"fa fa-eye\"></i></button></a>";
                 $delete = "<a href=\"#\" data-id=\"{$row->id}\" class=\"sa-remove\"><button class=\"btn btn-outline-danger btn-sm\"><i class=\"fa fa-times\"></i></button></a>";
                 
-                return "{$edit} {$show} {$delete}";
+                return "{$show} {$edit} {$delete}";
             })
             ->rawColumns(['actions'])
             ->make(true);
