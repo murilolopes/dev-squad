@@ -29,16 +29,16 @@
                                 <input type="text" name="description" class="form-control" placeholder="Description">
                             </div>
                             <div class="form-group col-6">
-                                <label for="price">Price</label>
-                                <input type="text" name="price" class="form-control" placeholder="Price">
-                            </div>
-                            <div class="form-group col-6">
                                 <label for="category_id">Categoty:</label>
                                 <select name="category_id" class="form-control">
                                     @foreach($categories as $category)
                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="price">Price</label>
+                                <input type="text" name="price" class="form-control" placeholder="Price">
                             </div>
                             <div class="form-group col-6">
                                 <label for="category_id">Photo:</label>
