@@ -114,11 +114,12 @@ class ProductsController extends Controller
             'category_id' => 'required'
         ]);
         
+        $product->update($request->all());
+
         if ($request->file('photo')) {
             if (count($product->media)) $product->media[0]->delete();
             $product->addMediaFromRequest('photo')->toMediaCollection('product_photos');
         }
-
   
         return redirect()->route('products.index')
                         ->with('success','Product updated successfully');
