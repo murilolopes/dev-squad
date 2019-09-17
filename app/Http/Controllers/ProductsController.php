@@ -134,6 +134,7 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         $product = \App\Product::findOrFail($id);
+        if (count($product->media)) $product->media[0]->delete();
         $product->delete();
   
         return 'true';
