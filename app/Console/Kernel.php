@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('CSV:Import')->everyFiveMinute();
+        $schedule->command('CSV:Import')->everyMinute();
     }
 
     /**

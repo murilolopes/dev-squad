@@ -50,14 +50,14 @@ class CSVImport extends Command
     {
         $products = [];
         foreach (\App\User::get() as $user) {
-            // if(count($user->media)) {
-                // foreach ($user->media as $media) {
-                    $csvArray = $this->csvToArray(public_path('csv/teste2.csv'));
+            if(count($user->media)) {
+                foreach ($user->media as $media) {
+                    $csvArray = $this->csvToArray($media->getPath());
                     $products = array_merge($products, $csvArray);
-                    // $media->delete();
-                // }
+                    $media->delete();
+                }
                 $users[$user->email] = $products;
-            // }
+            }
         }
     }
 

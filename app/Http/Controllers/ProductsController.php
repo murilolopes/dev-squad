@@ -75,12 +75,11 @@ class ProductsController extends Controller
     public function import(Request $request)
     {
         $request->validate([
-            'csv' => 'required|mimes:csv'
+            'csv' => 'required|mimes:csv,txt'
         ]);
-        $file = Storage::put('products_csv/', $request->file('csv'));
 
         $user = auth()->user();
-        $user->addMedia(storage_path('app/'.$file))->toMediaCollection('product_csv');
+        $user->addMediaFromRequest('csv')->toMediaCollection('product_csv', 'product_csv');
         return view('products.importView');
     }
 

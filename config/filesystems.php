@@ -46,6 +46,12 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+            'url' => '/teste',
+        ],
+
+        'product_csv' => [
+            'driver' => 'local',
+            'root' => storage_path('app/product_csv'),
         ],
 
         'public' => [
