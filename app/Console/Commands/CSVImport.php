@@ -82,7 +82,6 @@ class CSVImport extends Command
             $results['failures'] = $failures;
             $results['total'] = $success + $failures;
             $users[$email] = $results;
-            
         }
     }
 
