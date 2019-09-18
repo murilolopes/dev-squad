@@ -5,10 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use DataTables;
-
+use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,6 +55,33 @@ class ProductsController extends Controller
     {
         $categories = \App\Category::get()->all('name', 'id');
         return view('products.create', compact('categories'));
+    }
+
+    /**
+     * Show the form for import a csv file.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function importView()
+    {
+        return view('products.importView');
+    }
+
+    /**
+     * Store an imported csv file to storage path and associate then with a logged user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function import(Request $request)
+    {
+        $request->validate([
+            'csv' => 'required|mimes:csv'
+        ]);
+        $file = Storage::put('products_csv/', $request->file('csv'));
+
+        $user = auth()->user();
+        $user->addMedia(storage_path('app/'.$file))->toMediaCollection('product_csv');
+        return view('products.importView');
     }
 
     /**
