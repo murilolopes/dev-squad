@@ -1,7 +1,9 @@
 <html>
 <head></head>
-<body style="background: black; color: white">
-	<h1>{{$title}}</h1>
-	<p>{{$content}}</p>
+<body>
+	<h3>Hello {{$user->name}}</h3>
+	<p>Here is your scheduled CSV imports report:</p>
+	<p>{{$result['total']}} products were imported of which </p>
+	<p>{{$result['success']}} were successfully registered and {{$result['failures']}} failed </p>
 </body>
 </html>

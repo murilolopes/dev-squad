@@ -15,11 +15,36 @@ class Product extends Model implements HasMedia
 	
 	protected $fillable = [
 		'name', 'description', 'price', 'category_id'
-	];
+	];	
+
+	private $rules = array(
+        'name' => 'required|unique:products|max:64',
+        'description' => 'required',
+        'price' => 'required|numeric',
+        'category_id' => 'required'
+    );
+
+    private $errors;
 
 	public function Category()
 	{
 		return $this->belongsTo('App\Category');
 	}
-	
+
+    public function validate($data)
+    {
+        $valid = \Validator::make($data, $this->rules);
+
+        if ($valid->fails()){
+            $this->errors = $valid->errors()->toArray();
+            return false;
+        }
+
+        return true;
+    }
+
+    public function errors()
+    {
+        return $this->errors;
+    }
 }
