@@ -17,7 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/products/datatable', 'ProductsController@datatable')->name('products.datatable');
 Route::get('/products/import', 'ProductsController@importView')->name('products.importView');
 Route::post('/products/import', 'ProductsController@import')->name('products.import');
