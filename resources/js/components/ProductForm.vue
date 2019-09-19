@@ -1,6 +1,6 @@
 <template>
     <div class="panel-body">
-        <vue-form-generator :schema="schema" :model="model" ref="dev"></vue-form-generator>
+        <vue-form-generator :schema="schema" :model="model" :options="formOptions"></vue-form-generator>
     </div>
 </template>
 
@@ -20,16 +20,9 @@
     }
 
     export default {
+        props: ['model'],
         data () {
             return {
-                model: {
-                    id: '',
-                    name: '',
-                    description: '',
-                    category_id: '',
-                    price: '',
-                    photo: ''
-                },
                 schema: {
                     fields: [
                     {
@@ -84,14 +77,9 @@
                     {
                         type: "submit",
                         styleClasses: 'offset-4 col-2',
-                        buttonText: "Cancelar",
+                        buttonText: "Back",
                         onSubmit(model, schema) {
-                            model.id = '',
-                            model.name = '',
-                            model.description = '',
-                            model.category_id = '',
-                            model.price = '',
-                            model.photo = ''
+                            window.location = "/products"
                         }
                     },
                     {
@@ -108,26 +96,33 @@
                             formData.append('category_id', model.category_id)
                             formData.append('price', model.price)
                             formData.append('photo', photo)
+                            if (model.id)
+                                formData.append('_method', 'PUT')
 
                             Swal.fire({
-                                title: 'Create product',
+                                title: model.id ? 'Edit product' : 'Create product',
                                 type: 'question',
                                 showCancelButton: true,
                                 confirmButtonColor: '#3085d6',
                                 cancelButtonColor: '#d33',
-                                confirmButtonText: 'Yes, create!'
+                                confirmButtonText: 'Yes, do it!'
                             })
                             .then((result) => {
                                 if (result.value) 
-                                    axios.post('/products/', formData, config)
+                                    axios.post('/products' + (model.id ? '/'+model.id : '/'), formData, config)
                                 .then(() => { 
-                                    Swal.fire('Success!', 'Product has been created.', 'success')
-                                        .then(() => window.location = "/products")
+                                    Swal.fire('Success!', 'Product has been saved.', 'success')
+                                    .then(() => window.location = "/products")
                                 }).catch(() => Swal.fire('Error!', 'An error occurred in server. Try again!', 'error'))
                             })
                         }
                     }
                     ]
+                },
+                formOptions: {
+                    validateAfterLoad: true,
+                    validateAfterChanged: true,
+                    validateAsync: true
                 }
             }
         },

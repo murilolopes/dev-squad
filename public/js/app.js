@@ -1900,16 +1900,9 @@ vue_form_generator_dist_vfg_core_js__WEBPACK_IMPORTED_MODULE_2___default.a.valid
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['model'],
   data: function data() {
     return {
-      model: {
-        id: '',
-        name: '',
-        description: '',
-        category_id: '',
-        price: '',
-        photo: ''
-      },
       schema: {
         fields: [{
           type: 'input',
@@ -1961,9 +1954,9 @@ vue_form_generator_dist_vfg_core_js__WEBPACK_IMPORTED_MODULE_2___default.a.valid
         }, {
           type: "submit",
           styleClasses: 'offset-4 col-2',
-          buttonText: "Cancelar",
+          buttonText: "Back",
           onSubmit: function onSubmit(model, schema) {
-            model.id = '', model.name = '', model.description = '', model.category_id = '', model.price = '', model.photo = '';
+            window.location = "/products";
           }
         }, {
           type: "submit",
@@ -1982,16 +1975,17 @@ vue_form_generator_dist_vfg_core_js__WEBPACK_IMPORTED_MODULE_2___default.a.valid
             formData.append('category_id', model.category_id);
             formData.append('price', model.price);
             formData.append('photo', photo);
+            if (model.id) formData.append('_method', 'PUT');
             Swal.fire({
-              title: 'Create product',
+              title: model.id ? 'Edit product' : 'Create product',
               type: 'question',
               showCancelButton: true,
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes, create!'
+              confirmButtonText: 'Yes, do it!'
             }).then(function (result) {
-              if (result.value) axios.post('/products/', formData, config).then(function () {
-                Swal.fire('Success!', 'Product has been created.', 'success').then(function () {
+              if (result.value) axios.post('/products' + (model.id ? '/' + model.id : '/'), formData, config).then(function () {
+                Swal.fire('Success!', 'Product has been saved.', 'success').then(function () {
                   return window.location = "/products";
                 });
               })["catch"](function () {
@@ -2000,6 +1994,11 @@ vue_form_generator_dist_vfg_core_js__WEBPACK_IMPORTED_MODULE_2___default.a.valid
             });
           }
         }]
+      },
+      formOptions: {
+        validateAfterLoad: true,
+        validateAfterChanged: true,
+        validateAsync: true
       }
     };
   },
@@ -40952,8 +40951,11 @@ var render = function() {
     { staticClass: "panel-body" },
     [
       _c("vue-form-generator", {
-        ref: "dev",
-        attrs: { schema: _vm.schema, model: _vm.model }
+        attrs: {
+          schema: _vm.schema,
+          model: _vm.model,
+          options: _vm.formOptions
+        }
       })
     ],
     1
