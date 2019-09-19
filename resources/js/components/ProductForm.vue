@@ -110,18 +110,20 @@
                             formData.append('photo', photo)
 
                             Swal.fire({
-                                title: 'Are you sure?',
-                                text: "You won't be able to revert this!",
-                                type: 'warning',
+                                title: 'Create product',
+                                type: 'question',
                                 showCancelButton: true,
                                 confirmButtonColor: '#3085d6',
                                 cancelButtonColor: '#d33',
-                                confirmButtonText: 'Yes, delete it!'
+                                confirmButtonText: 'Yes, create!'
                             })
-                            .then(() => {
-                                axios.post('/products/', formData, config)
-                                .then(() => Swal.fire('AEW COROI!', 'Product has been deleted.', 'success'))
-                                .catch(() => Swal.fire('Error!', 'An error occurred in server. Try again!', 'error'))
+                            .then((result) => {
+                                if (result.value) 
+                                    axios.post('/products/', formData, config)
+                                .then(() => { 
+                                    Swal.fire('Success!', 'Product has been created.', 'success')
+                                        .then(() => window.location = "/products")
+                                }).catch(() => Swal.fire('Error!', 'An error occurred in server. Try again!', 'error'))
                             })
                         }
                     }

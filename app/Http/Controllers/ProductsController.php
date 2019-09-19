@@ -47,9 +47,9 @@ class ProductsController extends Controller
     }
 
     public function validateName($name) {
-        if (\App\Product::whereName($name)->first()) return Response::json(['Product name should be unique'], 422);
+        if (\App\Product::whereName($name)->first()) return \Response::json(['Product name should be unique'], 422);
 
-        return Response::json('', 204);
+        return \Response::json('', 204);
     }
 
     /**

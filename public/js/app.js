@@ -1983,16 +1983,17 @@ vue_form_generator_dist_vfg_core_js__WEBPACK_IMPORTED_MODULE_2___default.a.valid
             formData.append('price', model.price);
             formData.append('photo', photo);
             Swal.fire({
-              title: 'Are you sure?',
-              text: "You won't be able to revert this!",
-              type: 'warning',
+              title: 'Create product',
+              type: 'question',
               showCancelButton: true,
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes, delete it!'
-            }).then(function () {
-              axios.post('/products/', formData, config).then(function () {
-                return Swal.fire('AEW COROI!', 'Product has been deleted.', 'success');
+              confirmButtonText: 'Yes, create!'
+            }).then(function (result) {
+              if (result.value) axios.post('/products/', formData, config).then(function () {
+                Swal.fire('Success!', 'Product has been created.', 'success').then(function () {
+                  return window.location = "/products";
+                });
               })["catch"](function () {
                 return Swal.fire('Error!', 'An error occurred in server. Try again!', 'error');
               });
