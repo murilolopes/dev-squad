@@ -10,6 +10,7 @@ try {
     window.$ = window.jQuery = require('jquery');
     window.Popper = require('popper.js').default;
 
+	require('vue-form-generator')
     require('bootstrap');
 } catch (e) {}
 

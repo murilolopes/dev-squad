@@ -142,7 +142,6 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         $product = \App\Product::findOrFail($id);
-
         $request->validate([
             'name' => ['required', Rule::unique('products')->ignore($product->id), 'max:64'],
             'description' => 'required',
