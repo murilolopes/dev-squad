@@ -1892,7 +1892,7 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_form_generator_dist_vfg_core_js__WEBPACK_IMPORTED_MODULE_2___default.a);
 
 vue_form_generator_dist_vfg_core_js__WEBPACK_IMPORTED_MODULE_2___default.a.validators.unique_product_name = function (value, field, model) {
-  if (value) return axios.get('/validate_product_name/' + model.name).then(function (resp) {
+  if (value) return axios.get('/products/validate_name/' + model.name).then(function (resp) {
     return [];
   })["catch"](function (resp) {
     return ['Product name should be unique'];

@@ -19,16 +19,11 @@ Auth::routes();
 
 Route::get('/categories_list', 'CategoriesController@list')->name('categories.list');
 
-Route::get('/validate_product_name/{name}', function($name) {
-	if (\App\Product::whereName($name)->first()) return Response::json(['ja tem'], 422);
-	
-	return Response::json(['tem nao pode cadastrar'], 200);
-})->name('products.datatable');
-
+Route::get('/products/validate_name/{name}', 'ProductsController@validateName')->name('products.validateName');
 Route::get('/products/datatable', 'ProductsController@datatable')->name('products.datatable');
 Route::get('/products/import', 'ProductsController@importView')->name('products.importView');
 Route::post('/products/import', 'ProductsController@import')->name('products.import');
-
 Route::resource('products', 'ProductsController');
+
 
 

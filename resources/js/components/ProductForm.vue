@@ -14,7 +14,7 @@
 
     VueFormGenerator.validators.unique_product_name = function(value, field, model) {
         if(value)
-            return axios.get('/validate_product_name/' + model.name)
+            return axios.get('/products/validate_name/' + model.name)
         .then(resp => { return [] } )
         .catch(resp => { return ['Product name should be unique']} )
     }

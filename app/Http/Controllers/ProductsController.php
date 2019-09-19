@@ -32,18 +32,24 @@ class ProductsController extends Controller
     public function datatable()
     {
         return Datatables::of(\App\Product::query()->with('category'))
-            ->addColumn('actions', function($row) {
-                $edit_path = route('products.edit', $row->id);
-                $show_path = route('products.show', $row->id);
+        ->addColumn('actions', function($row) {
+            $edit_path = route('products.edit', $row->id);
+            $show_path = route('products.show', $row->id);
 
-                $edit = "<a href=\"{$edit_path}\"><button class=\"btn btn-outline-info btn-sm\"><i class=\"fa fa-pencil\"></i></button></a>";
-                $show = "<a href=\"{$show_path}\"><button class=\"btn btn-outline-info btn-sm\"><i class=\"fa fa-eye\"></i></button></a>";
-                $delete = "<a href=\"#\" data-id=\"{$row->id}\" class=\"sa-remove\"><button class=\"btn btn-outline-danger btn-sm\"><i class=\"fa fa-times\"></i></button></a>";
-                
-                return "{$show} {$edit} {$delete}";
-            })
-            ->rawColumns(['actions'])
-            ->make(true);
+            $edit = "<a href=\"{$edit_path}\"><button class=\"btn btn-outline-info btn-sm\"><i class=\"fa fa-pencil\"></i></button></a>";
+            $show = "<a href=\"{$show_path}\"><button class=\"btn btn-outline-info btn-sm\"><i class=\"fa fa-eye\"></i></button></a>";
+            $delete = "<a href=\"#\" data-id=\"{$row->id}\" class=\"sa-remove\"><button class=\"btn btn-outline-danger btn-sm\"><i class=\"fa fa-times\"></i></button></a>";
+
+            return "{$show} {$edit} {$delete}";
+        })
+        ->rawColumns(['actions'])
+        ->make(true);
+    }
+
+    public function validateName($name) {
+        if (\App\Product::whereName($name)->first()) return Response::json(['Product name should be unique'], 422);
+
+        return Response::json('', 204);
     }
 
     /**
@@ -103,7 +109,7 @@ class ProductsController extends Controller
             $product->addMediaFromRequest('photo')->toMediaCollection('product_photos');
 
         return redirect()->route('products.index')
-            ->with('success','Product created successfully.');
+        ->with('success','Product created successfully.');
     }
 
     /**
@@ -155,9 +161,9 @@ class ProductsController extends Controller
             if (count($product->media)) $product->media[0]->delete();
             $product->addMediaFromRequest('photo')->toMediaCollection('product_photos');
         }
-  
+
         return redirect()->route('products.index')
-                        ->with('success','Product updated successfully');
+        ->with('success','Product updated successfully');
     }
 
     /**
@@ -171,7 +177,7 @@ class ProductsController extends Controller
         $product = \App\Product::findOrFail($id);
         if (count($product->media)) $product->media[0]->delete();
         $product->delete();
-  
+
         return 'true';
     }
 }
