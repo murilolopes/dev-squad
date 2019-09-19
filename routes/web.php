@@ -17,9 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/categories', function() {
-	return \App\Category::get()->all('name', 'id');
-})->name('categories.index');
+Route::get('/categories_list', 'CategoriesController@list')->name('categories.list');
 
 Route::get('/validate_product_name/{name}', function($name) {
 	if (\App\Product::whereName($name)->first()) return Response::json(['ja tem'], 422);

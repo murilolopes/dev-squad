@@ -130,7 +130,7 @@
             }
         },
         created() {
-            axios.get('/categories/').then((res) => this.schema.fields[2].values = res.data)
+            axios.get('/categories_list').then((res) => this.schema.fields[2].values = res.data)
         }
     }
 </script>

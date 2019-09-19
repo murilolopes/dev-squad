@@ -2005,7 +2005,7 @@ vue_form_generator_dist_vfg_core_js__WEBPACK_IMPORTED_MODULE_2___default.a.valid
   created: function created() {
     var _this = this;
 
-    axios.get('/categories/').then(function (res) {
+    axios.get('/categories_list').then(function (res) {
       return _this.schema.fields[2].values = res.data;
     });
   }
